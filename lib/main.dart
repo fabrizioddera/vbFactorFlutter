@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sms/sms.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'concorrenti.dart';
 
 void main() => runApp(MyApp());
 
@@ -46,13 +48,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void listenSMS(){
-    SmsReceiver receiver = new SmsReceiver();
-    receiver.onSmsReceived.listen((SmsMessage msg) => print(msg.body));
+
+  void incrementSMS(SmsMessage msg){
   }
 
   @override
   Widget build(BuildContext context) {
+
+    List<Concorrente> concorrentiCanto = Concorrente.returnListCanto();
+    List<Concorrente> concorrentiBallo = Concorrente.returnListBallo();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -67,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           child: new ListView.builder(
-        itemCount: 10,
+        itemCount: concorrentiCanto.length,
         itemBuilder: (context, i) {
           return new Container(
               padding: new EdgeInsets.all(5.0),
@@ -78,10 +82,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: <Widget>[
                         new Icon(Icons.android),
                         new Text("Concorrente: "),
-                        new Text("$i")
+                        new Text("$i"),
                       ],
                     ),
-                    new Text("Progress Bar")
+                    new Row(
+                      children: <Widget>[
+                        new Text("Voti: "),
+                        new Text(concorrentiCanto[i].voti.toString())
+                      ],
+                    )
                   ],
                 )
               ]));
