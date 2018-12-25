@@ -16,6 +16,18 @@ class Concorrente {
   }
 
   static List<Concorrente> returnListBallo() {
-    return new List(10);
+    List<Concorrente> list = new List();
+    for (var i = 0; i < 10; i++) {
+      list.add(new Concorrente("Ballo_$i", 1));
+    }
+    return list;
+  }
+
+  static List<Concorrente> returnListMusical() {
+    List<Concorrente> list = new List();
+    for (var i = 0; i < 10; i++) {
+      list.add(new Concorrente("Musical_$i", 1));
+    }
+    return list;
   }
 }

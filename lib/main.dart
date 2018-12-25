@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sms/sms.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'concorrenti.dart';
+import 'smsReceiver.dart';
+import 'votingUtils.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,16 +48,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Concorrente> concorrentiCanto = Concorrente.returnListCanto();
+  List<Concorrente> concorrentiBallo = Concorrente.returnListBallo();
 
+  void incrementSMS(SmsMessage msg) {
+    if(msg.body != ''){
+    List<String> splitString = msg.body.split(new RegExp(' '));
+    if(splitString.length > 0 && splitString.length == 7){
+      String code = splitString[0];
+      if(VotingUtils.isCodeValid(code)){
+        int code1 = int.tryParse(splitString[1]);
+        if(code1 == null){
+          return;
+        }
+      }
+    }
+    setState(() {});
+    }
+  }
 
-  void incrementSMS(SmsMessage msg){
+  @override
+  void initState(){
+    super.initState();
+    VBSMSReciver.startListenToSMS(incrementSMS);
   }
 
   @override
   Widget build(BuildContext context) {
-
-    List<Concorrente> concorrentiCanto = Concorrente.returnListCanto();
-    List<Concorrente> concorrentiBallo = Concorrente.returnListBallo();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
