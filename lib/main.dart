@@ -3,6 +3,8 @@ import 'package:sms/sms.dart';
 import 'concorrenti.dart';
 import 'smsReceiver.dart';
 import 'votingUtils.dart';
+import 'pages/classicVote.dart';
+import 'style.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,20 +13,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'VB Factor 2019',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        buttonTheme: ButtonThemeData(
+          minWidth: 200,
+          height: 75,
+        ),
+        primarySwatch: StyleVBFactor.getMainColorMaterial(),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'VB Factor 2019'),
     );
   }
 }
@@ -52,23 +49,23 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Concorrente> concorrentiBallo = Concorrente.returnListBallo();
 
   void incrementSMS(SmsMessage msg) {
-    if(msg.body != ''){
-    List<String> splitString = msg.body.split(new RegExp(' '));
-    if(splitString.length > 0 && splitString.length == 7){
-      String code = splitString[0];
-      if(VotingUtils.isCodeValid(code)){
-        int code1 = int.tryParse(splitString[1]);
-        if(code1 == null){
-          return;
+    if (msg.body != '') {
+      List<String> splitString = msg.body.split(new RegExp(' '));
+      if (splitString.length > 0 && splitString.length == 7) {
+        String code = splitString[0];
+        if (VotingUtils.isCodeValid(code)) {
+          int code1 = int.tryParse(splitString[1]);
+          if (code1 == null) {
+            return;
+          }
         }
       }
-    }
-    setState(() {});
+      setState(() {});
     }
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     VBSMSReciver.startListenToSMS(incrementSMS);
   }
@@ -82,38 +79,48 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: new ListView.builder(
-        itemCount: concorrentiCanto.length,
-        itemBuilder: (context, i) {
-          return new Container(
-              padding: new EdgeInsets.all(5.0),
-              child: new Row(children: <Widget>[
-                new Column(
-                  children: <Widget>[
-                    new Row(
-                      children: <Widget>[
-                        new Icon(Icons.android),
-                        new Text("Concorrente: "),
-                        new Text("$i"),
-                      ],
-                    ),
-                    new Row(
-                      children: <Widget>[
-                        new Text("Voti: "),
-                        new Text(concorrentiCanto[i].voti.toString())
-                      ],
-                    )
-                  ],
-                )
-              ]));
-        },
-      )),
-    );
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Padding(
+                  padding: new EdgeInsets.all(25),
+                  child: new RaisedButton(
+                    textColor: Colors.white,
+                    color: StyleVBFactor.getMainColor(),
+                    child: new Text('Votazione classica'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClassicVote()));
+                    },
+                  )),
+              new Padding(
+                padding: new EdgeInsets.all(25),
+                child: new RaisedButton(
+                  textColor: Colors.white,
+                  color: StyleVBFactor.getMainColor(),
+                  child: new Text('Votazione Kids'),
+                  onPressed: () {},
+                ),
+              ),
+              new Padding(
+                  padding: new EdgeInsets.all(25),
+                  child: new RaisedButton(
+                    textColor: Colors.white,
+                    color: StyleVBFactor.getMainColor(),
+                    child: new Text('Votazione musical'),
+                    onPressed: () {},
+                  )),
+            ],
+          ),
+        ));
   }
 }
