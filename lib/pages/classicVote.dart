@@ -3,6 +3,7 @@ import 'package:sms/sms.dart';
 import '../concorrenti.dart';
 import '../smsReceiver.dart';
 import '../votingUtils.dart';
+import '../my_custom_class_icons.dart';
 
 class ClassicVote extends StatelessWidget {
   @override
@@ -54,14 +55,41 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-          child: new ListView.builder(
-        itemCount: concorrentiCanto.length,
+          child: new Column(
+        children: <Widget>[
+          new ListView.builder(
+            itemCount: concorrentiCanto.length,
+            itemBuilder: (context, i) {
+              return new Container(
+                  padding: new EdgeInsets.all(5.0),
+                  child: new Row(children: <Widget>[
+                    new Column(
+                      children: <Widget>[
+                        new Row(
+                          children: <Widget>[
+                            new Icon(MyCustomClass.microphone),
+                            new Text("Concorrente: "),
+                            new Text("$i"),
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Text("Voti: "),
+                            new Text(concorrentiCanto[i].voti.toString())
+                          ],
+                        )
+                      ],
+                    )
+                  ]));
+            },
+          ),
+          new ListView.builder(
+        itemCount: concorrentiBallo.length,
         itemBuilder: (context, i) {
           return new Container(
               padding: new EdgeInsets.all(5.0),
@@ -70,7 +98,7 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
                   children: <Widget>[
                     new Row(
                       children: <Widget>[
-                        new Icon(Icons.android),
+                        new Icon(MyCustomClass.ballet),
                         new Text("Concorrente: "),
                         new Text("$i"),
                       ],
@@ -78,13 +106,15 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
                     new Row(
                       children: <Widget>[
                         new Text("Voti: "),
-                        new Text(concorrentiCanto[i].voti.toString())
+                        new Text(concorrentiBallo[i].voti.toString())
                       ],
                     )
                   ],
                 )
               ]));
         },
+      )
+        ],
       )),
     );
   }

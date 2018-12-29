@@ -4,6 +4,8 @@ import 'concorrenti.dart';
 import 'smsReceiver.dart';
 import 'votingUtils.dart';
 import 'pages/classicVote.dart';
+import 'pages/kidsVote.dart';
+import 'pages/musicalVote.dart';
 import 'style.dart';
 
 void main() => runApp(MyApp());
@@ -108,7 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   textColor: Colors.white,
                   color: StyleVBFactor.getMainColor(),
                   child: new Text('Votazione Kids'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => KidsVote()));
+                  },
                 ),
               ),
               new Padding(
@@ -117,7 +124,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     textColor: Colors.white,
                     color: StyleVBFactor.getMainColor(),
                     child: new Text('Votazione musical'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MusicalVote()));
+                    },
                   )),
             ],
           ),
