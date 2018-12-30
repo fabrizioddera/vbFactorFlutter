@@ -29,8 +29,8 @@ class ClassicVoteStateful extends StatefulWidget {
 }
 
 class _ClassicVoteState extends State<ClassicVoteStateful> {
-  List<Concorrente> concorrentiCanto = Concorrente.returnListCanto();
-  List<Concorrente> concorrentiBallo = Concorrente.returnListBallo();
+  List<Concorrente> concorrentiCanto = Concorrente.returnListCanto(10);
+  List<Concorrente> concorrentiBallo = Concorrente.returnListBallo(10);
 
   void incrementSMS(SmsMessage msg) {
     if (msg.body != '') {
@@ -199,8 +199,8 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
-                  concorrentiCanto = Concorrente.returnListCanto();
-                  concorrentiBallo = Concorrente.returnListBallo();
+                  concorrentiCanto = Concorrente.returnListCanto(10);
+                  concorrentiBallo = Concorrente.returnListBallo(10);
                   setState(() {});
                 },
                 child: new Icon(Icons.delete),

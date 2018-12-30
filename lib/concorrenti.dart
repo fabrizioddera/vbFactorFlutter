@@ -7,7 +7,7 @@ class Concorrente {
     this.voti = voti;
   }
 
-  static List<Concorrente> returnListCanto() {
+  static List<Concorrente> returnListCanto(int size) {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
       list.add(new Concorrente("Canto_$i", 0));
@@ -15,7 +15,7 @@ class Concorrente {
     return list;
   }
 
-  static List<Concorrente> returnListBallo() {
+  static List<Concorrente> returnListBallo(int size) {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
       list.add(new Concorrente("Ballo_$i", 0));
@@ -23,7 +23,7 @@ class Concorrente {
     return list;
   }
 
-  static List<Concorrente> returnListMusical() {
+  static List<Concorrente> returnListMusical(int size) {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
       list.add(new Concorrente("Musical_$i", 0));
