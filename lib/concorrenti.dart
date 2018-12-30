@@ -2,7 +2,7 @@ class Concorrente {
   String name;
   int voti;
 
-  Concorrente(String name, int voti){
+  Concorrente(String name, int voti) {
     this.name = name;
     this.voti = voti;
   }

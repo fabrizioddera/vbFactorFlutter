@@ -39,96 +39,174 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
         String code = splitString[0];
         if (VotingUtils.isCodeValid(code)) {
           int code1 = int.tryParse(splitString[1]);
-          if (code1 == null) {
+          if (code1 == null || code1 <= 0 || code1 > 10) {
             return;
           }
+          int code2 = int.tryParse(splitString[2]);
+          if (code2 == null || code2 <= 0 || code2 > 10) {
+            return;
+          }
+          int code3 = int.tryParse(splitString[3]);
+          if (code3 == null || code3 <= 0 || code3 > 10) {
+            return;
+          }
+          int code4 = int.tryParse(splitString[4]);
+          if (code4 == null || code4 <= 0 || code4 > 10) {
+            return;
+          }
+          int code5 = int.tryParse(splitString[5]);
+          if (code5 == null || code5 <= 0 || code5 > 10) {
+            return;
+          }
+          int code6 = int.tryParse(splitString[6]);
+          if (code6 == null || code6 <= 0 || code6 > 10) {
+            return;
+          }
+          if (code1 == code2 || code1 == code3 || code2 == code3) {
+            return;
+          }
+          if (code4 == code5 || code4 == code6 || code5 == code6) {
+            return;
+          }
+          concorrentiCanto[code1 - 1].voti =
+              concorrentiCanto[code1 - 1].voti + 1;
+          concorrentiCanto[code2 - 1].voti =
+              concorrentiCanto[code2 - 1].voti + 1;
+          concorrentiCanto[code3 - 1].voti =
+              concorrentiCanto[code3 - 1].voti + 1;
+          concorrentiBallo[code4 - 1].voti =
+              concorrentiBallo[code4 - 1].voti + 1;
+          concorrentiBallo[code5 - 1].voti =
+              concorrentiBallo[code5 - 1].voti + 1;
+          concorrentiBallo[code6 - 1].voti =
+              concorrentiBallo[code6 - 1].voti + 1;
         }
       }
-      setState(() {});
     }
   }
 
   @override
   void initState() {
     super.initState();
-    VBSMSReciver.startListenToSMS(incrementSMS);
+    VotingUtils.generateCodeList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          title: Text(widget.title),
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            ListView.builder(
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemCount: concorrentiCanto.length,
-              itemBuilder: (context, i) {
-                i = i + 1;
-                return new Container(
-                    padding: new EdgeInsets.all(5.0),
-                    child: new Row(children: <Widget>[
-                      new Column(
-                        children: <Widget>[
-                          new Row(
+          slivers: <Widget>[
+            SliverAppBar(
+              title: Text(widget.title),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemCount: concorrentiCanto.length,
+                  itemBuilder: (context, i) {
+                    i = i + 1;
+                    return new Container(
+                        padding: new EdgeInsets.all(5.0),
+                        child: new Row(children: <Widget>[
+                          new Column(
                             children: <Widget>[
-                              new Icon(MyCustomClass.microphone),
-                              new Text("Concorrente: "),
-                              new Text("$i"),
-                            ],
-                          ),
-                          new Row(
-                            children: <Widget>[
-                              new Text("Voti: "),
-                              new Text(concorrentiCanto[i - 1].voti.toString())
-                            ],
-                          )
-                        ],
-                      )
-                    ]));
-              },
-            )
-          ]),
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            new ListView.builder(
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemCount: concorrentiBallo.length,
-              itemBuilder: (context, i) {
-                i = i + 1;
-                return new Container(
-                    padding: new EdgeInsets.all(5.0),
-                    child: new Row(children: <Widget>[
-                      new Column(
-                        children: <Widget>[
-                          new Row(
-                            children: <Widget>[
-                              new Icon(MyCustomClass.ballet),
-                              new Text("Concorrente: "),
-                              new Text("$i"),
-                            ],
-                          ),
-                          new Row(
-                            children: <Widget>[
-                              new Text("Voti: "),
-                              new Text(concorrentiBallo[i - 1].voti.toString())
+                              new Row(
+                                children: <Widget>[
+                                  new Icon(MyCustomClass.microphone),
+                                  new Text("Concorrente: "),
+                                  new Text("$i"),
+                                ],
+                              ),
+                              new Row(
+                                children: <Widget>[
+                                  new Text("Voti: "),
+                                  new Text(
+                                      concorrentiCanto[i - 1].voti.toString())
+                                ],
+                              )
                             ],
                           )
-                        ],
-                      )
-                    ]));
-              },
+                        ]));
+                  },
+                )
+              ]),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                new ListView.builder(
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemCount: concorrentiBallo.length,
+                  itemBuilder: (context, i) {
+                    i = i + 1;
+                    return new Container(
+                        padding: new EdgeInsets.all(5.0),
+                        child: new Row(children: <Widget>[
+                          new Column(
+                            children: <Widget>[
+                              new Row(
+                                children: <Widget>[
+                                  new Icon(MyCustomClass.ballet),
+                                  new Text("Concorrente: "),
+                                  new Text("$i"),
+                                ],
+                              ),
+                              new Row(
+                                children: <Widget>[
+                                  new Text("Voti: "),
+                                  new Text(
+                                      concorrentiBallo[i - 1].voti.toString())
+                                ],
+                              )
+                            ],
+                          )
+                        ]));
+                  },
+                )
+              ]),
             )
-          ]),
-        )
-      ],
-    ));
+          ],
+        ),
+        floatingActionButton: new Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new Padding(
+              padding: EdgeInsets.all(5),
+              child: new FloatingActionButton(
+                heroTag: null,
+                onPressed: () {
+                  VBSMSReciver.startListenToSMS(incrementSMS);
+                },
+                child: new Icon(Icons.play_arrow),
+              ),
+            ),
+            new Padding(
+              padding: EdgeInsets.all(5),
+              child: new FloatingActionButton(
+                heroTag: null,
+                onPressed: () {
+                  VBSMSReciver.stopListenToSMS();
+                  setState(() {});
+                },
+                child: new Icon(Icons.stop),
+              ),
+            ),
+            new Padding(
+              padding: EdgeInsets.all(5),
+              child: new FloatingActionButton(
+                heroTag: null,
+                onPressed: () {
+                  concorrentiCanto = Concorrente.returnListCanto();
+                  concorrentiBallo = Concorrente.returnListBallo();
+                  setState(() {});
+                },
+                child: new Icon(Icons.delete),
+              ),
+            )
+          ],
+        ));
   }
 }
