@@ -10,11 +10,11 @@ class KidsVote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'VB Factor 2019',
       theme: ThemeData(
          primarySwatch: StyleVBFactor.getMainColorMaterial(),
       ),
-      home: KidsVoteStateful(title: 'Flutter Demo Home Page'),
+      home: KidsVoteStateful(title: 'VB Factor 2019 Votazione Kids'),
     );
   }
 }

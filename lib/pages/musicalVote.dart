@@ -10,11 +10,11 @@ class MusicalVote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'VB Factor 2019',
       theme: ThemeData(
-         primarySwatch: StyleVBFactor.getMainColorMaterial(),
+        primarySwatch: StyleVBFactor.getMainColorMaterial(),
       ),
-      home: MusicalVoteStateful(title: 'Flutter Demo Home Page'),
+      home: MusicalVoteStateful(title: 'VB Factor 2019 Votazione Musical'),
     );
   }
 }
