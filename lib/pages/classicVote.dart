@@ -89,31 +89,31 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
             },
           ),
           new ListView.builder(
-        itemCount: concorrentiBallo.length,
-        itemBuilder: (context, i) {
-          return new Container(
-              padding: new EdgeInsets.all(5.0),
-              child: new Row(children: <Widget>[
-                new Column(
-                  children: <Widget>[
-                    new Row(
+            itemCount: concorrentiBallo.length,
+            itemBuilder: (context, i) {
+              return new Container(
+                  padding: new EdgeInsets.all(5.0),
+                  child: new Row(children: <Widget>[
+                    new Column(
                       children: <Widget>[
-                        new Icon(MyCustomClass.ballet),
-                        new Text("Concorrente: "),
-                        new Text("$i"),
-                      ],
-                    ),
-                    new Row(
-                      children: <Widget>[
-                        new Text("Voti: "),
-                        new Text(concorrentiBallo[i].voti.toString())
+                        new Row(
+                          children: <Widget>[
+                            new Icon(MyCustomClass.ballet),
+                            new Text("Concorrente: "),
+                            new Text("$i"),
+                          ],
+                        ),
+                        new Row(
+                          children: <Widget>[
+                            new Text("Voti: "),
+                            new Text(concorrentiBallo[i].voti.toString())
+                          ],
+                        )
                       ],
                     )
-                  ],
-                )
-              ]));
-        },
-      )
+                  ]));
+            },
+          )
         ],
       )),
     );
