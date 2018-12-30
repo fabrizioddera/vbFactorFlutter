@@ -10,7 +10,7 @@ class Concorrente {
   static List<Concorrente> returnListCanto() {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
-      list.add(new Concorrente("Canto_$i", 1));
+      list.add(new Concorrente("Canto_$i", 0));
     }
     return list;
   }
@@ -18,7 +18,7 @@ class Concorrente {
   static List<Concorrente> returnListBallo() {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
-      list.add(new Concorrente("Ballo_$i", 1));
+      list.add(new Concorrente("Ballo_$i", 0));
     }
     return list;
   }
@@ -26,7 +26,7 @@ class Concorrente {
   static List<Concorrente> returnListMusical() {
     List<Concorrente> list = new List();
     for (var i = 0; i < 10; i++) {
-      list.add(new Concorrente("Musical_$i", 1));
+      list.add(new Concorrente("Musical_$i", 0));
     }
     return list;
   }

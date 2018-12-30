@@ -4,16 +4,17 @@ import '../concorrenti.dart';
 import '../smsReceiver.dart';
 import '../votingUtils.dart';
 import '../my_custom_class_icons.dart';
+import '../style.dart';
 
 class ClassicVote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'VB Factor 2019',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: StyleVBFactor.getMainColorMaterial(),
       ),
-      home: ClassicVoteStateful(title: 'Flutter Demo Home Page'),
+      home: ClassicVoteStateful(title: 'VB Factor 2019 Votazione Classica'),
     );
   }
 }
@@ -56,66 +57,78 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: new Column(
-        children: <Widget>[
-          new ListView.builder(
-            itemCount: concorrentiCanto.length,
-            itemBuilder: (context, i) {
-              return new Container(
-                  padding: new EdgeInsets.all(5.0),
-                  child: new Row(children: <Widget>[
-                    new Column(
-                      children: <Widget>[
-                        new Row(
-                          children: <Widget>[
-                            new Icon(MyCustomClass.microphone),
-                            new Text("Concorrente: "),
-                            new Text("$i"),
-                          ],
-                        ),
-                        new Row(
-                          children: <Widget>[
-                            new Text("Voti: "),
-                            new Text(concorrentiCanto[i].voti.toString())
-                          ],
-                        )
-                      ],
-                    )
-                  ]));
-            },
-          ),
-          new ListView.builder(
-            itemCount: concorrentiBallo.length,
-            itemBuilder: (context, i) {
-              return new Container(
-                  padding: new EdgeInsets.all(5.0),
-                  child: new Row(children: <Widget>[
-                    new Column(
-                      children: <Widget>[
-                        new Row(
-                          children: <Widget>[
-                            new Icon(MyCustomClass.ballet),
-                            new Text("Concorrente: "),
-                            new Text("$i"),
-                          ],
-                        ),
-                        new Row(
-                          children: <Widget>[
-                            new Text("Voti: "),
-                            new Text(concorrentiBallo[i].voti.toString())
-                          ],
-                        )
-                      ],
-                    )
-                  ]));
-            },
-          )
-        ],
-      )),
-    );
+        body: CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          title: Text(widget.title),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([
+            ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: concorrentiCanto.length,
+              itemBuilder: (context, i) {
+                i = i + 1;
+                return new Container(
+                    padding: new EdgeInsets.all(5.0),
+                    child: new Row(children: <Widget>[
+                      new Column(
+                        children: <Widget>[
+                          new Row(
+                            children: <Widget>[
+                              new Icon(MyCustomClass.microphone),
+                              new Text("Concorrente: "),
+                              new Text("$i"),
+                            ],
+                          ),
+                          new Row(
+                            children: <Widget>[
+                              new Text("Voti: "),
+                              new Text(concorrentiCanto[i - 1].voti.toString())
+                            ],
+                          )
+                        ],
+                      )
+                    ]));
+              },
+            )
+          ]),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([
+            new ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: concorrentiBallo.length,
+              itemBuilder: (context, i) {
+                i = i + 1;
+                return new Container(
+                    padding: new EdgeInsets.all(5.0),
+                    child: new Row(children: <Widget>[
+                      new Column(
+                        children: <Widget>[
+                          new Row(
+                            children: <Widget>[
+                              new Icon(MyCustomClass.ballet),
+                              new Text("Concorrente: "),
+                              new Text("$i"),
+                            ],
+                          ),
+                          new Row(
+                            children: <Widget>[
+                              new Text("Voti: "),
+                              new Text(concorrentiBallo[i - 1].voti.toString())
+                            ],
+                          )
+                        ],
+                      )
+                    ]));
+              },
+            )
+          ]),
+        )
+      ],
+    ));
   }
 }
