@@ -29,6 +29,7 @@ class ClassicVoteStateful extends StatefulWidget {
 }
 
 class _ClassicVoteState extends State<ClassicVoteStateful> {
+  GlobalKey<ScaffoldState> scaffoldState = new GlobalKey<ScaffoldState>();
   List<Concorrente> concorrentiCanto = Concorrente.returnListCanto(10);
   List<Concorrente> concorrentiBallo = Concorrente.returnListBallo(10);
 
@@ -94,6 +95,7 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldState,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -178,7 +180,11 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  final snackBar = new SnackBar(
+                    content: Text("Votazione in corso..."),
+                  );
                   VBSMSReciver.startListenToSMS(incrementSMS);
+                  scaffoldState.currentState.showSnackBar(snackBar);
                 },
                 child: new Icon(Icons.play_arrow),
               ),

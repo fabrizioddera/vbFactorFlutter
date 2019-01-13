@@ -29,6 +29,7 @@ class MusicalVoteStateful extends StatefulWidget {
 }
 
 class _MusicalVoteState extends State<MusicalVoteStateful> {
+  GlobalKey<ScaffoldState> scaffoldState = new GlobalKey<ScaffoldState>();
   List<Concorrente> concorrentiMusical = Concorrente.returnListCanto(10);
 
   void incrementSMS(SmsMessage msg) {
@@ -61,6 +62,7 @@ class _MusicalVoteState extends State<MusicalVoteStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldState,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -111,6 +113,10 @@ class _MusicalVoteState extends State<MusicalVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  final snackBar = new SnackBar(
+                    content: Text("Votazione in corso..."),
+                  );
+                  scaffoldState.currentState.showSnackBar(snackBar);
                   VBSMSReciver.startListenToSMS(incrementSMS);
                 },
                 child: new Icon(Icons.play_arrow),

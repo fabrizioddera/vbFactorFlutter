@@ -12,7 +12,7 @@ class KidsVote extends StatelessWidget {
     return MaterialApp(
       title: 'VB Factor 2019',
       theme: ThemeData(
-         primarySwatch: StyleVBFactor.getMainColorMaterial(),
+        primarySwatch: StyleVBFactor.getMainColorMaterial(),
       ),
       home: KidsVoteStateful(title: 'VB Factor 2019 Votazione Kids'),
     );
@@ -29,10 +29,11 @@ class KidsVoteStateful extends StatefulWidget {
 }
 
 class _KidsVoteState extends State<KidsVoteStateful> {
+  GlobalKey<ScaffoldState> scaffoldState = new GlobalKey<ScaffoldState>();
   List<Concorrente> concorrentiCanto = Concorrente.returnListCanto(5);
   List<Concorrente> concorrentiBallo = Concorrente.returnListBallo(5);
 
-    void incrementSMS(SmsMessage msg) {
+  void incrementSMS(SmsMessage msg) {
     if (msg.body != '') {
       List<String> splitString = msg.body.split(new RegExp(' '));
       if (splitString.length > 0 && splitString.length == 7) {
@@ -61,10 +62,10 @@ class _KidsVoteState extends State<KidsVoteStateful> {
     VotingUtils.generateCodeList();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldState,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -149,6 +150,10 @@ class _KidsVoteState extends State<KidsVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  final snackBar = new SnackBar(
+                    content: Text("Votazione in corso..."),
+                  );
+                  scaffoldState.currentState.showSnackBar(snackBar);
                   VBSMSReciver.startListenToSMS(incrementSMS);
                 },
                 child: new Icon(Icons.play_arrow),
