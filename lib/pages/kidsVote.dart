@@ -164,6 +164,7 @@ class _KidsVoteState extends State<KidsVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  VotingUtils.generateCodeList();
                   VBSMSReciver.stopListenToSMS();
                   setState(() {});
                 },

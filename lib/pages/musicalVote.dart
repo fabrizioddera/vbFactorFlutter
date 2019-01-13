@@ -127,6 +127,7 @@ class _MusicalVoteState extends State<MusicalVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  VotingUtils.generateCodeList();
                   VBSMSReciver.stopListenToSMS();
                   setState(() {});
                 },

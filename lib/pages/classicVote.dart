@@ -194,6 +194,7 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
+                  VotingUtils.generateCodeList();
                   VBSMSReciver.stopListenToSMS();
                   setState(() {});
                 },
@@ -204,7 +205,7 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
               padding: EdgeInsets.all(5),
               child: new FloatingActionButton(
                 heroTag: null,
-                onPressed: () {
+                onPressed: () {                 
                   concorrentiCanto = Concorrente.returnListCanto(10);
                   concorrentiBallo = Concorrente.returnListBallo(10);
                   setState(() {});
