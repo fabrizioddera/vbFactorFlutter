@@ -36,7 +36,7 @@ class _KidsVoteState extends State<KidsVoteStateful> {
   void incrementSMS(SmsMessage msg) {
     if (msg.body != '') {
       List<String> splitString = msg.body.split(new RegExp(' '));
-      if (splitString.length > 0 && splitString.length == 7) {
+      if (splitString.length > 0 && splitString.length == 3) {
         String code = splitString[0];
         if (VotingUtils.isCodeValid(code)) {
           int code1 = int.tryParse(splitString[1]);
