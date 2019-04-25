@@ -3,7 +3,7 @@ class VotingUtils {
 
   static bool isCodeValid(String code) {
     code ??= '';
-    code.toLowerCase();
+    code = code.toLowerCase();
     if (codes.contains(code)) {
       codes.remove(code);
       return true;
