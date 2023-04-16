@@ -36,15 +36,15 @@ class _KidsVoteState extends State<KidsVoteStateful> {
   void incrementSMS(SmsMessage msg) {
     if (msg.body != '') {
       List<String> splitString = msg.body.split(new RegExp(' '));
-      if (splitString.length > 0 && splitString.length == 7) {
+      if (splitString.length > 0 && splitString.length == 3) {
         String code = splitString[0];
         if (VotingUtils.isCodeValid(code)) {
           int code1 = int.tryParse(splitString[1]);
-          if (code1 == null || code1 <= 0 || code1 > 10) {
+          if (code1 == null || code1 <= 0 || code1 > 6) {
             return;
           }
           int code2 = int.tryParse(splitString[2]);
-          if (code2 == null || code2 <= 0 || code2 > 10) {
+          if (code2 == null || code2 <= 0 || code2 > 6) {
             return;
           }
           concorrentiCanto[code1 - 1].voti =
@@ -176,8 +176,8 @@ class _KidsVoteState extends State<KidsVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
-                  concorrentiCanto = Concorrente.returnListCanto(10);
-                  concorrentiBallo = Concorrente.returnListBallo(10);
+                  concorrentiCanto = Concorrente.returnListCanto(5);
+                  concorrentiBallo = Concorrente.returnListBallo(5);
                   setState(() {});
                 },
                 child: new Icon(Icons.delete),

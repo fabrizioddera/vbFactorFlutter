@@ -34,6 +34,7 @@ class _ClassicVoteState extends State<ClassicVoteStateful> {
   List<Concorrente> concorrentiBallo = Concorrente.returnListBallo(10);
 
   void incrementSMS(SmsMessage msg) {
+    print('Messaggio ricevuto!');
     if (msg.body != '') {
       List<String> splitString = msg.body.split(new RegExp(' '));
       if (splitString.length > 0 && splitString.length == 7) {

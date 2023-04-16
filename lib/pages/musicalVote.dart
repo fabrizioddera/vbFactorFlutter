@@ -35,15 +35,11 @@ class _MusicalVoteState extends State<MusicalVoteStateful> {
   void incrementSMS(SmsMessage msg) {
     if (msg.body != '') {
       List<String> splitString = msg.body.split(new RegExp(' '));
-      if (splitString.length > 0 && splitString.length == 7) {
+      if (splitString.length > 0 && splitString.length == 2) {
         String code = splitString[0];
         if (VotingUtils.isCodeValid(code)) {
           int code1 = int.tryParse(splitString[1]);
           if (code1 == null || code1 <= 0 || code1 > 10) {
-            return;
-          }
-          int code2 = int.tryParse(splitString[2]);
-          if (code2 == null || code2 <= 0 || code2 > 10) {
             return;
           }
           concorrentiMusical[code1 - 1].voti =
@@ -139,7 +135,7 @@ class _MusicalVoteState extends State<MusicalVoteStateful> {
               child: new FloatingActionButton(
                 heroTag: null,
                 onPressed: () {
-                  concorrentiMusical = Concorrente.returnListCanto(10);
+                  concorrentiMusical = Concorrente.returnListMusical(10);
                   setState(() {});
                 },
                 child: new Icon(Icons.delete),
